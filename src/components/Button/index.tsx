@@ -4,25 +4,31 @@ import { IconBaseProps } from 'react-icons/lib';
 import { Container } from './styles';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: string;
   outline?: boolean;
   small?: boolean;
-  iconLeft?: React.ComponentType<IconBaseProps>;
-  iconRight?: React.ComponentType<IconBaseProps>;
+  icon?: React.ComponentType<IconBaseProps>;
+  iconPosition?: 'left' | 'right' | 'only' | 'only-sm';
 }
 
 const Button: React.FC<ButtonProps> = ({
   children,
   outline,
   small,
-  iconLeft: IconLeft,
-  iconRight: IconRight,
+  icon: Icon,
+  iconPosition,
   ...rest
 }) => {
   return (
-    <Container type="button" outline={outline} small={small} {...rest}>
-      {IconLeft && <IconLeft />}
+    <Container
+      type="button"
+      outline={outline}
+      small={small}
+      {...rest}
+      iconPosition={iconPosition}
+    >
+      {Icon && <Icon />}
       <span>{children}</span>
-      {IconRight && <IconRight />}
     </Container>
   );
 };

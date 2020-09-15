@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 interface ButtonProps {
   outline?: boolean;
   small?: boolean;
+  iconPosition?: 'left' | 'right' | 'only' | 'only-sm';
 }
 
 export const Container = styled.button<ButtonProps>`
@@ -41,5 +42,63 @@ export const Container = styled.button<ButtonProps>`
     css`
       font-size: 14px;
       padding: 8px 16px;
+    `}
+
+  ${props =>
+    props.iconPosition === 'only' &&
+    css`
+      padding-right: 0;
+      padding-left: 0;
+      width: 38px;
+      svg {
+        display: initial;
+        margin: 0 !important;
+      }
+
+      span {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+    `}
+
+    ${props =>
+    props.iconPosition === 'only-sm' &&
+    css`
+      svg {
+        display: none;
+      }
+
+      span {
+        margin-left: 0 !important;
+      }
+
+      @media screen and (max-width: 767px) {
+        padding-right: 0;
+        padding-left: 0;
+        width: 38px;
+        svg {
+          display: initial;
+          margin: 0 !important;
+        }
+
+        span {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+      }
     `}
 `;
