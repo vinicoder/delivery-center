@@ -1,11 +1,11 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import Route from './Route';
 
-import Dashboard from '../pages/Dashboard';
-import SignIn from '../pages/SignIn';
-import Orders from '../pages/Orders';
-import Order from '../pages/Order';
+import Dashboard from 'pages/Dashboard';
+import SignIn from 'pages/SignIn';
+import Orders from 'pages/Orders';
+import Order from 'pages/Order';
+import Route from './Route';
 
 const Routes: React.FC = () => (
   <Switch>

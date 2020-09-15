@@ -1,9 +1,10 @@
 import React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
-import { useAuth } from '../hooks/AuthContext';
+import { useAuth } from 'hooks/AuthContext';
 
 interface RouteWrapperProps extends RouteProps {
   isPrivate?: boolean;
+  path?: string;
 }
 
 const RouteWrapper: React.FC<RouteWrapperProps> = ({
