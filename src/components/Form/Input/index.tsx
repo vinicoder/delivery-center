@@ -1,6 +1,8 @@
 import React, {
   InputHTMLAttributes,
   useCallback,
+  useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -24,13 +26,22 @@ const Input: React.FC<InputProps> = ({ name, label, className, ...rest }) => {
     setIsFilled(!!inputRef.current?.value);
   }, []);
 
+  const inputId = useMemo(() => {
+    return btoa(name + label);
+  }, [name, label]);
+
+  useEffect(() => {
+    handleInputBlur();
+  }, [handleInputBlur]);
+
   return (
     <Container isFocused={isFocused} isFilled={isFilled} className={className}>
-      {label && <label htmlFor={name}>{label}</label>}
+      {label && <label htmlFor={inputId}>{label}</label>}
       <input
         onFocus={() => setIsFocused(true)}
         onBlur={handleInputBlur}
         name={name}
+        id={inputId}
         ref={inputRef}
         {...rest}
       />

@@ -33,6 +33,7 @@ export const Container = styled.div<ContainerProps>`
     border: 0;
     height: 40px;
     width: 100%;
+    border-radius: 8px;
   }
 
   ${props =>
