@@ -19,9 +19,8 @@ export const Container = styled.button<ButtonProps>`
   align-items: center;
   justify-content: center;
 
-  span ~ svg,
-  svg + span {
-    margin-left: 10px;
+  svg {
+    margin-right: 10px;
   }
 
   &:hover {
@@ -99,6 +98,16 @@ export const Container = styled.button<ButtonProps>`
           white-space: nowrap;
           border: 0;
         }
+      }
+    `}
+
+    ${props =>
+    props.iconPosition === 'right' &&
+    css`
+      svg {
+        order: 2;
+        margin-right: 0;
+        margin-left: 10px;
       }
     `}
 `;
