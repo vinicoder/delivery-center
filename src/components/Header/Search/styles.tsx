@@ -27,7 +27,7 @@ export const Container = styled.form<SearchProps>`
     appearance: none;
     border: 0;
     background: none;
-    height: 32px;
+    height: 35px;
   }
 
   input {
@@ -35,7 +35,7 @@ export const Container = styled.form<SearchProps>`
     width: calc(100% - 40px);
     text-overflow: ellipsis;
     padding-left: 10px;
-    line-height: 32px;
+    line-height: 35px;
   }
 
   button {
