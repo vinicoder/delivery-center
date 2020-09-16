@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
+import bgSignin from 'assets/bg-signin.svg';
+
 export const Container = styled.main`
+  background: url(${bgSignin}) 60vw center / auto 70% no-repeat;
+
   .col {
     height: 100vh;
     display: flex;

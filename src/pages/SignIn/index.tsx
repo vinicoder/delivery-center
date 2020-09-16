@@ -30,49 +30,51 @@ const SignIn: React.FC = () => {
   }, []);
 
   return (
-    <Container className="container">
-      <div className="row">
-        <div className="col">
-          <img
-            src={figureSignin}
-            alt="Entregador segurando caixas para entregar"
-            className="img-fluid"
-            width={420}
-            height={420}
-          />
-        </div>
-        <div className="col">
-          <img
-            src={logo}
-            alt="Logotipo da Delivery Center"
-            width={219}
-            height={49}
-          />
-          <div className="card">
-            <h1>Entrar</h1>
-            <p className="description">
-              Entre com sua conta e admnistre os seus pedidos.
-            </p>
-            <form onSubmit={handleSubmit}>
-              <Input
-                className="input-control"
-                name="email"
-                type="email"
-                label="E-mail"
-                onChange={({ target }) => setEmail(target.value)}
-                required
-              />
-              <Input
-                className="input-control"
-                name="password"
-                type="password"
-                label="Senha"
-                required
-              />
-              <Button type="submit" icon={FiArrowRight} iconPosition="right">
-                Entrar
-              </Button>
-            </form>
+    <Container>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <img
+              src={figureSignin}
+              alt="Entregador segurando caixas para entregar"
+              className="img-fluid"
+              width={420}
+              height={420}
+            />
+          </div>
+          <div className="col">
+            <img
+              src={logo}
+              alt="Logotipo da Delivery Center"
+              width={219}
+              height={49}
+            />
+            <div className="card">
+              <h1>Entrar</h1>
+              <p className="description">
+                Entre com sua conta e admnistre os seus pedidos.
+              </p>
+              <form onSubmit={handleSubmit}>
+                <Input
+                  className="input-control"
+                  name="email"
+                  type="email"
+                  label="E-mail"
+                  onChange={({ target }) => setEmail(target.value)}
+                  required
+                />
+                <Input
+                  className="input-control"
+                  name="password"
+                  type="password"
+                  label="Senha"
+                  required
+                />
+                <Button type="submit" icon={FiArrowRight} iconPosition="right">
+                  Entrar
+                </Button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
