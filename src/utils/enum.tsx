@@ -2,8 +2,12 @@ interface PaymentType {
   [type: string]: string;
 }
 
-export const PAYMENT_METHOD: PaymentType = {
+const PAYMENT_METHOD: PaymentType = {
   CREDIT: 'Crédito',
   DEBIT: 'Débito',
   ONLINE: 'Online',
+};
+
+export default {
+  PAYMENT_METHOD,
 };

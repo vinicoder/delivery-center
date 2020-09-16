@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import ScrollToTop from 'utils/ScrollToTop';
+import { ScrollToTop } from 'utils';
 import { ApolloProvider } from '@apollo/client';
 import { AuthProvider } from './hooks/AuthContext';
 

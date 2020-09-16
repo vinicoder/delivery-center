@@ -18,10 +18,11 @@ import Breadcrumb from 'components/Breadcrumb';
 import Button from 'components/Button';
 import Loader from 'components/Loader';
 
-import { formatToCurrency, getDebitAmount } from 'utils';
-import { PAYMENT_METHOD } from 'utils/enum';
+import { formatToCurrency, getDebitAmount, enums } from 'utils';
 
 import { Container } from './styles';
+
+const { PAYMENT_METHOD } = enums;
 
 export interface Customer {
   name: string;
