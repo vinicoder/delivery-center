@@ -86,7 +86,7 @@ export const Container = styled.main`
 
         div {
           strong {
-            font-size: 32px;
+            font-size: 26px;
             margin-bottom: 16px;
           }
           span {

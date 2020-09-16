@@ -1,30 +1,117 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   FiArrowRight,
   FiDollarSign,
+  FiRefreshCw,
   FiShoppingBag,
   FiUsers,
 } from 'react-icons/fi';
-
+import { useQuery, gql } from '@apollo/client';
 import { HorizontalBar, ChartComponentProps } from 'react-chartjs-2';
 
 import Header from 'components/Header';
 
 import Button from 'components/Button';
 import { Link } from 'react-router-dom';
+import Loader from 'components/Loader';
+import { formatToCurrency } from 'utils';
 import { Container } from './styles';
 
-const Dashboard: React.FC = () => {
-  const latestOrders = [1, 2, 3];
+interface Customer {
+  _id: string;
+}
 
-  const chartData: ChartComponentProps = {
+interface Order {
+  _id: string;
+  store: string;
+  externalReference: string;
+  amount: number;
+  reference: number;
+  customer: Customer;
+}
+
+interface Data {
+  orders: Order[];
+}
+
+interface CardsParams {
+  orders: number;
+  clients: number;
+  amount: number;
+}
+
+const GET_ORDERS = gql`
+  query getOrders {
+    orders {
+      _id
+      store
+      externalReference
+      reference
+      amount
+      customer {
+        _id
+      }
+    }
+  }
+`;
+
+const Dashboard: React.FC = () => {
+  const { loading, error, data, refetch } = useQuery<Data>(GET_ORDERS);
+  const [cardsData, setCardsData] = useState<CardsParams>({
+    orders: 0,
+    clients: 0,
+    amount: 0,
+  });
+
+  const stores = ['DPIZZA', 'DBURGER', 'DHOTDOG'];
+
+  const loadCardsData = useCallback(() => {
+    const orders = data?.orders;
+
+    if (!orders) return;
+
+    const totalOrders = orders?.length;
+
+    const totalClients = [...new Set(orders.map(order => order.customer._id))]
+      .length;
+
+    const totalAmount = orders
+      .map(order => order.amount)
+      .reduce((a, b) => a + b);
+
+    setCardsData({
+      orders: totalOrders,
+      clients: totalClients,
+      amount: totalAmount,
+    });
+  }, [data]);
+
+  useEffect(() => {
+    loadCardsData();
+  }, [loadCardsData]);
+
+  const chartData = useCallback(() => {
+    const orders = data?.orders;
+
+    if (!orders) return [];
+
+    const results: number[] = [];
+
+    stores.forEach(store => {
+      results.push(orders.filter(order => order.store === store).length || 0);
+    });
+
+    return results;
+  }, [data, stores]);
+
+  const chartConfig: ChartComponentProps = {
     data: {
-      labels: ['DPIZZA', 'DBURGER', 'DHOTDOG'],
+      labels: stores,
       datasets: [
         {
           borderWidth: 0,
           backgroundColor: ['#FCCB99', '#85BDBF', '#FE5100'],
-          data: [130, 240, 100],
+          data: chartData(),
         },
       ],
     },
@@ -70,27 +157,41 @@ const Dashboard: React.FC = () => {
             </p>
           </div>
 
+          {error && (
+            <div className="card alert">
+              <h6>Nenhuma informação disponível.</h6>
+              <Button
+                icon={FiRefreshCw}
+                outline
+                iconPosition="right"
+                onClick={() => refetch()}
+              >
+                Tentar novamente
+              </Button>
+            </div>
+          )}
+
           <div className="section-content">
             <div className="featured-cards">
               <div className="card card-outline" tabIndex={0}>
                 <FiShoppingBag />
                 <div>
-                  <strong>6.530</strong>
-                  <span>Pedidos</span>
+                  <strong>{data && cardsData.orders}</strong>
+                  <span>{loading ? 'Carregando...' : 'Pedidos'}</span>
                 </div>
               </div>
               <div className="card card-outline" tabIndex={0}>
                 <FiUsers />
                 <div>
-                  <strong>250</strong>
-                  <span>Clientes</span>
+                  <strong>{data && cardsData.clients}</strong>
+                  <span>{loading ? 'Carregando...' : 'Clientes'}</span>
                 </div>
               </div>
               <div className="card card-outline" tabIndex={0}>
                 <FiDollarSign />
                 <div>
-                  <strong>R$ 4.500</strong>
-                  <span>Faturamento</span>
+                  <strong>{data && formatToCurrency(cardsData.amount)}</strong>
+                  <span>{loading ? 'Carregando...' : 'Faturamento'}</span>
                 </div>
               </div>
             </div>
@@ -99,44 +200,55 @@ const Dashboard: React.FC = () => {
               <div className="col">
                 <div className="card" tabIndex={0}>
                   <div className="card-title">Pedidos recentes</div>
-                  <div className="order-list">
-                    {latestOrders.map(order => (
-                      <Link
-                        key={order}
-                        to={`orders/${order}`}
-                        className="order"
-                      >
-                        <div className="card-header">
-                          <div className="card-date" tabIndex={0}>
-                            <strong>6</strong>
-                            <span>Set</span>
+                  {data && (
+                    <div className="order-list">
+                      {data.orders.map(order => (
+                        <Link
+                          key={order._id}
+                          to={`orders/${order.reference}`}
+                          className="order"
+                        >
+                          <div className="card-header">
+                            <div className="card-date" tabIndex={0}>
+                              <strong>6</strong>
+                              <span>Set</span>
+                            </div>
+                            <div className="card-header-info" tabIndex={0}>
+                              <span>
+                                REF
+                                {` #${order.externalReference}`}
+                              </span>
+                              <strong>{order.store}</strong>
+                            </div>
+                            <Button
+                              outline
+                              icon={FiArrowRight}
+                              iconPosition="only"
+                            >
+                              Ver Detalhes
+                            </Button>
                           </div>
-                          <div className="card-header-info" tabIndex={0}>
-                            <span>REF #1234</span>
-                            <strong>DPIZZA</strong>
-                          </div>
-                          <Button
-                            outline
-                            icon={FiArrowRight}
-                            iconPosition="only"
-                          >
-                            Ver Detalhes
-                          </Button>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+
+                  {loading && <Loader />}
                 </div>
               </div>
               <div className="col">
                 <div className="card" tabIndex={0}>
                   <div className="card-title">Pedidos por lojista</div>
-                  <div className="chart">
-                    <HorizontalBar
-                      data={chartData.data}
-                      options={chartData.options}
-                    />
-                  </div>
+                  {data && (
+                    <div className="chart">
+                      <HorizontalBar
+                        data={chartConfig.data}
+                        options={chartConfig.options}
+                      />
+                    </div>
+                  )}
+
+                  {loading && <Loader />}
                 </div>
               </div>
             </div>
