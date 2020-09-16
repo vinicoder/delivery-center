@@ -212,6 +212,14 @@ export default createGlobalStyle`
     padding: calc(var(--gutter-default) + 10px) 0;
   }
 
+  .alert {
+    text-align: center;
+    button {
+      margin: 0 auto;
+      margin-top: 20px;
+    }
+  }
+
   @media screen and (min-width: 768px){
 
     :root{
