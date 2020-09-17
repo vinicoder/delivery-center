@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components';
 
-interface ContainerProps {
+interface InputContainerProps {
   isFocused: boolean;
   isFilled: boolean;
+  isError: boolean;
 }
 
-export const Container = styled.div<ContainerProps>`
+export const InputContainer = styled.div<InputContainerProps>`
   position: relative;
   border: solid 1px #eaeaea;
   border-radius: 8px;
@@ -43,6 +44,12 @@ export const Container = styled.div<ContainerProps>`
     `}
 
   ${props =>
+    props.isError &&
+    css`
+      border-color: var(--color-danger);
+    `}
+
+  ${props =>
     (props.isFilled || props.isFocused) &&
     css`
       label {
@@ -54,4 +61,11 @@ export const Container = styled.div<ContainerProps>`
         padding-top: 12px;
       }
     `}
+`;
+
+export const ErrorLabel = styled.label`
+  color: var(--color-danger);
+  margin: 5px 0;
+  font-size: 14px;
+  display: block;
 `;
