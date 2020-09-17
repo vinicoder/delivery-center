@@ -2,6 +2,8 @@ import { createGlobalStyle } from 'styled-components';
 
 import { shade } from 'polished';
 
+import bgSignin from 'assets/bg-signin.svg';
+
 export default createGlobalStyle`
 
   :root{
@@ -41,7 +43,7 @@ export default createGlobalStyle`
   body{
     min-height: 100%;
     color: var(--color-default);
-    background: var(--color-light);
+    background-color: var(--color-light);
     -webkit-font-smoothing: antialiased;
 
     &:not(.signin){
@@ -52,6 +54,8 @@ export default createGlobalStyle`
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      justify-content: center;
+      background: var(--color-light) url(${bgSignin}) 60vw center / auto 70% no-repeat;
     }
   }
 
