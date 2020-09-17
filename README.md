@@ -51,9 +51,11 @@ Instale todas as dependências do projeto: `npm install` ou com Yarn `yarn`
 
 &nbsp;
 Feito isso, vamos rodar o nosso projeto em **desenvolvimento** com o seguinte comando: `npm run start` ou com Yarn `yarn start`
+&nbsp;
 _Abrirá automaticamente uma janela no seu browser padrão com o endereço de desenvolvimento geral._
 
 Para realizar **build** execute: `npm run build` ou com Yarn `yarn build`
+&nbsp;
 _Será gerado dentro da raiz do seu projeto uma pasta com o nome build, onde estará o projeto gerado para produção._
 
 Para realizar **testes** execute: `npm run test` ou com Yarn `yarn test`
