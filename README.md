@@ -4,7 +4,7 @@
 
 &nbsp;&nbsp;
 
-### ✍️ Objetivo do Projeto
+### ✍️ Sobre do Projeto
 
 Olá visitante! É um prazer ter você por aqui!
 Este projeto foi criado como forma de estudo, para o aprofundamento em Typescript e React.
@@ -12,6 +12,8 @@ Este projeto foi criado como forma de estudo, para o aprofundamento em Typescrip
 A ideia era fazer um simples e pequeno painel para visualização de pedidos de delivery. E para que pudesse ser realizado, utilizei uma API fornecia pela empresa [Delivery Center](https://www.deliverycenter.com/).
 
 Como há parte da API que ainda não foi disponibilizada, alguns recursos tiveram que ser adaptados para o uso. Por isso a ideia é que seja ajustado conforme o tempo e disponibilização.
+
+## Para visualizar o projeto acesse: https://delivery-center.vercel.app/
 
 &nbsp;&nbsp;
 
