@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "extends": [
     "plugin:react/recommended",
@@ -42,7 +43,8 @@
     "@typescript-eslint/no-use-before-define": [1],
     "react/prop-types": "off",
     "jsx-a11y/no-noninteractive-tabindex": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "no-return-assign": "off"
   },
   "settings": {
     "import/resolver": {
