@@ -148,7 +148,7 @@ const Dashboard: React.FC = () => {
       <Container>
         <div className="container">
           <div className="section-header" tabIndex={0}>
-            <h1 className="section-title">Olá, Jon Doe</h1>
+            <h1 className="section-title">Olá, John Doe</h1>
             <h4 className="section-title section-title-thin text-secondary">
               Bom te receber de volta! :)
             </h4>
