@@ -6,7 +6,7 @@ export const Container = styled.main`
   background: url(${bgSignin}) 60vw center / auto 70% no-repeat;
 
   .col {
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;

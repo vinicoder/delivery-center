@@ -30,17 +30,28 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
+  html{
+    height: 100%;
+  }
+
   html, body{
     min-height: 100%;
   }
 
   body{
+    min-height: 100%;
     color: var(--color-default);
     background: var(--color-light);
     -webkit-font-smoothing: antialiased;
 
     &:not(.signin){
       padding-top: calc(var(--header-height) + var(--menu-height));
+    }
+
+    &.signin{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
     }
   }
 
