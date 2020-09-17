@@ -4,7 +4,7 @@ import { IconBaseProps } from 'react-icons/lib';
 import { Container } from './styles';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string;
+  children: React.ReactNode;
   outline?: boolean;
   small?: boolean;
   icon?: React.ComponentType<IconBaseProps>;
