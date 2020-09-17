@@ -2,6 +2,7 @@ import React, { createContext, useCallback, useState, useContext } from 'react';
 
 interface SignInCredentials {
   email: string;
+  password: string;
 }
 
 interface User {
@@ -28,10 +29,10 @@ export const AuthProvider: React.FC = ({ children }) => {
     return null;
   });
 
-  const signIn = useCallback(credentials => {
-    setUser(credentials);
+  const signIn = useCallback(({ email }) => {
+    setUser({ email });
 
-    localStorage.setItem('@DeliveryCenter:user', JSON.stringify(credentials));
+    localStorage.setItem('@DeliveryCenter:user', JSON.stringify({ email }));
   }, []);
 
   function signOut() {

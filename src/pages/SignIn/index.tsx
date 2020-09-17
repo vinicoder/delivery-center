@@ -1,5 +1,6 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { FiArrowRight } from 'react-icons/fi';
+import * as Yup from 'yup';
 
 import { useAuth } from 'hooks/AuthContext';
 
@@ -10,13 +11,61 @@ import Button from 'components/Button';
 
 import { Container } from './styles';
 
+interface DataParams {
+  email: string;
+  password: string;
+}
+
+interface FormEventData extends FormEvent<HTMLFormElement> {
+  target: HTMLElement;
+}
+
+interface ErrorData {
+  [index: string]: string;
+}
+
 const SignIn: React.FC = () => {
   const { signIn } = useAuth();
-  const [email, setEmail] = useState<string>('');
+  const [errors, setErrors] = useState<ErrorData>({});
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEventData) {
     event.preventDefault();
-    signIn({ email });
+
+    try {
+      const form = event.target;
+
+      const inputValue = (name: string) =>
+        form.querySelector<HTMLInputElement>(`input[name=${name}]`)?.value ||
+        '';
+
+      const data: DataParams = {
+        email: inputValue('email'),
+        password: inputValue('password'),
+      };
+
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .email('E-mail inválido')
+          .required('E-mail obrigatório'),
+        password: Yup.string().required('Senha obrigatória'),
+      });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+
+      signIn(data);
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const validationErrors: ErrorData = {};
+
+        err.inner.forEach(error => {
+          validationErrors[error.path] = error.message;
+        });
+
+        setErrors(validationErrors);
+      }
+    }
   }
 
   useEffect(() => {
@@ -60,15 +109,14 @@ const SignIn: React.FC = () => {
                   name="email"
                   type="email"
                   label="E-mail"
-                  onChange={({ target }) => setEmail(target.value)}
-                  required
+                  error={errors.email}
                 />
                 <Input
                   className="input-control"
                   name="password"
                   type="password"
                   label="Senha"
-                  required
+                  error={errors.password}
                 />
                 <Button type="submit" icon={FiArrowRight} iconPosition="right">
                   Entrar
