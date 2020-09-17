@@ -1,13 +1,11 @@
 function getParents(child: HTMLElement): string[] {
   const parents: HTMLElement[] = [];
   const classesAndIds: string[] = [];
-
   const getElements = (childElem: HTMLElement) => {
     parents.push(childElem);
     if (childElem.parentElement) getElements(childElem.parentElement);
   };
   getElements(child);
-
   parents.forEach((parent: HTMLElement) => {
     if (parent.classList) {
       parent.classList.forEach(className =>
@@ -19,7 +17,7 @@ function getParents(child: HTMLElement): string[] {
     }
   });
 
-  return classesAndIds as [];
+  return classesAndIds;
 }
 
 export default function isChildOf(
