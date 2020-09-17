@@ -15,6 +15,8 @@ Como há parte da API que ainda não foi disponibilizada, alguns recursos tivera
 
 ### Para visualizar o projeto acesse: https://delivery-center.vercel.app/
 
+> Obs: Utilize qualquer informação de login e senha para entrar. Ele serve apenas para demonstração, assim como outras partes da aplicação.
+
 &nbsp;&nbsp;
 
 ### 🎨 UI (User Interface)
