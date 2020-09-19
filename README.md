@@ -4,7 +4,7 @@
 
 &nbsp;&nbsp;
 
-### ✍️ Sobre do Projeto
+### ✍️ Sobre o Projeto
 
 Olá visitante! É um prazer ter você por aqui!
 Este projeto foi criado como forma de estudo, para o aprofundamento em Typescript e React.
